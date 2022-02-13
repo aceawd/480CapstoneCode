@@ -1,0 +1,36 @@
+library(tidyverse) # loads the tidyverse library that includes the ggplot funtion
+RheumArth %>%
+  ggplot(aes(x = Age))+ # Defines the Age variable on the x-axis
+  geom_histogram(binwidth = 1, fill = "#97B3C6")+ # Plot a histogram with these settings
+  #coord_flip()+ #flips the x/y axis; good for a lot of categories
+  theme_bw()+
+  labs(x = "Patient Age")
+
+RheumArth %>%
+  ggplot(aes(x = Sex))+ # Defines the Sex variable on the x-axis
+  geom_bar(fill = "#97B3C6")+ # Plot a bar chart with this color
+  #coord_flip()+ #flips the x/y axis; good for a lot of categories
+  theme_bw()+
+  labs(x = "Patient on Steriods")
+
+RheumArth %>%
+  ggplot(aes(x = Steroids_GT_5))+ # Defines the steriods variable on the x-axis
+  geom_bar(fill = "#97B3C6")+ # Plot a bar chart with these settings
+  #coord_flip()+ #flips the x/y axis; good for a lot of categories
+  theme_bw()+
+  labs(x = "Patient on Steriods")
+  
+# change column types to factors
+  data$Sex <- as.factor(data$Sex)
+data$CDAI_YN <- as.factor(data$Sex)
+data$DAS28_YN <- as.factor(data$Sex)
+data$Steroids_GT_5 <- as.factor(data$Sex)
+data$DMARDs <- as.factor(data$Sex)
+data$Biologics <- as.factor(data$Sex)
+data$sDMARDS <- as.factor(data$Sex)
+data$OsteopScreen <- as.factor(data$Sex)
+
+# DAS_28 linear model
+DASYes.lm <- lm(DAS_28 ~ ., data = data)
+summary(DASYes.lm)
+plot(DASYes.lm)
